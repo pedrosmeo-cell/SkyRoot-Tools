@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="edit-container">
+    <h1 class="edit-title">Editar Ativo</h1>
+
+    <div class="form-wrapper">
+        <form action="/edit/{{ product_id }}" method="POST">
+            <div class="edit-grid">
+
+                <!-- LOJA -->
+                <div class="form-group">
+                    <label class="form-label">LOJA:</label>
+                    <select name="affiliate" class="form-control">
+                        {% for store in ['Amazon', 'AliExpress-PT-ES', 'AliExpress-BR'] %}
+                        <option value="{{ store }}" {% if p.affiliate == store %}selected{% endif %}>
+                            {% if store == 'Amazon' %}Amazon Global
+                            {% elif store == 'AliExpress-PT-ES' %}AliExpress (PT/ES)
+                            {% elif store == 'AliExpress-BR' %}AliExpress (BR)
+                            {% endif %}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- NOME -->
+                <div class="form-group">
+                    <label class="form-label">NOME DO PRODUTO:</label>
+                    <input type="text" name="name" value="{{ p.name }}" required class="form-control">
+                </div>
+
+                <!-- PREÇO -->
+                <div class="form-group">
+                    <label class="form-label">PREÇO:</label>
+                    <input type="text" name="price" value="{{ p.price }}" placeholder="0.00€" class="form-control">
+                </div>
+
+                <!-- CATEGORIA -->
+                <div class="form-group">
+                    <label class="form-label">CATEGORIA:</label>
+                    <select name="category" class="form-control">
+                        {% for cat in ['Mesa', 'Cadeira'] %}
+                        <option value="{{ cat }}" {% if p.category == cat %}selected{% endif %}>{{ cat }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- IMAGEM -->
+                <div class="form-group">
+                    <label class="form-label">FICHEIRO DA FOTO (Ex: mesa1.jpg):</label>
+                    <input type="text" name="image_url" value="{{ p.image }}" required class="form-control">
+                </div>
+
+                <!-- LINK -->
+                <div class="form-group">
+                    <label class="form-label">LINK DE AFILIADO:</label>
+                    <input type="text" name="link" value="{{ p.link }}" required class="form-control">
+                </div>
+
+                <!-- DESTAQUE -->
+                <div class="edit-featured">
+                    <input type="checkbox" name="featured" id="featured" value="yes" {% if p.featured %}checked{% endif %} class="checkbox-control">
+                    <label for="featured" class="checkbox-label">
+                        ⭐ DESTACAR ESTE PRODUTO NA HOME
+                    </label>
+                </div>
+            </div>
+
+            <!-- BOTÕES DE AÇÃO -->
+            <div class="edit-actions">
+                <a href="/dashboard" class="btn-cancel">Cancelar</a>
+                <button type="submit" class="btn-update">Atualizar Ativo</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

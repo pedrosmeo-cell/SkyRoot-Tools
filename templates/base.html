@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyRoot Tools</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- BANNER DE COOKIES EM CONFORMIDADE COM O RGPD -->
+    <div id="cookie-banner">
+        <p>Utilizamos cookies próprios e de terceiros para lhe oferecer publicidade baseada nos seus interesses e analisar métricas. Veja o nosso <a href="/privacidade" style="color: #fff; text-decoration: underline;">Aviso de Cookies</a> para mais detalhes.</p>
+        <div class="cookie-buttons">
+            <button onclick="setCookieConsent('rejected')" class="btn-cookie-deny">Rejeitar</button>
+            <button onclick="setCookieConsent('accepted')" class="btn-cookie-accept">Aceitar cookies</button>
+        </div>
+    </div>
+
+    <header>
+        <nav>
+
+            <!-- LOGÓTIPO COM TÍTULO ATUALIZADO E LEGENDA ORIGINAL RESTAURADA -->
+            <div class="logo">
+                <a href="/">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="SkyRoot Logo" onerror="this.src='{{ url_for('static', filename='images/logo.jpg') }}'; this.onerror=null;">
+                    <div style="display: flex; flex-direction: column;">
+                        <span>SKYROOT Tools</span>
+                        <small style="text-transform: uppercase !important; color: #7f8c8d !important; letter-spacing: 3px !important; font-size: 0.52rem !important; display: block !important;">OFFICE SOLUTIONS</small>
+                    </div>
+                </a>
+            </div>
+
+            <button class="menu-toggle" onclick="toggleNav()">Menu ☰</button>
+
+            <ul class="nav-links" id="menuList">
+                <li><a href="/">Home</a></li>
+
+                <!-- AMAZON GLOBAL -->
+                <li class="dropdown-item">
+                    <a href="javascript:void(0)" onclick="toggleSubMenu(this)">Amazon Global ▾</a>
+                    <div class="dropdown-content">
+                        <a href="/produtos/amazon">Ver Tudo</a>
+                        <a href="/produtos/amazon?cat=Berbequim">Berbequim</a>
+                        <a href="/produtos/amazon?cat=Aparafusadoras">Aparafusadoras</a>
+                        <a href="/produtos/amazon?cat=Rebarbadora">Rebarbadora</a>
+                        <a href="/produtos/amazon?cat=Serras">Serras</a>
+                        <a href="/produtos/amazon?cat=Lixadora">Lixadora</a>
+                        <a href="/produtos/amazon?cat=Plaina elétrica">Plaina elétrica</a>
+                        <a href="/produtos/amazon?cat=Pistola de ar quente">Pistola de ar quente</a>
+                        <a href="/produtos/amazon?cat=Compressores de ar">Compressores de ar</a>
+                        <a href="/produtos/amazon?cat=Geradores elétricos">Geradores elétricos</a>
+                        <a href="/produtos/amazon?cat=Bombas de água">Bombas de água</a>
+                    </div>
+                </li>
+
+                <!-- ALIEXPRESS (PT/ES) -->
+                <li class="dropdown-item">
+                    <a href="javascript:void(0)" onclick="toggleSubMenu(this)">AliExpress (PT/ES) ▾</a>
+                    <div class="dropdown-content">
+                        <a href="/produtos/aliexpress-pt-es">Ver Tudo</a>
+                        <a href="/produtos/aliexpress-pt-es?cat=Berbequim">Berbequim</a>
+                        <a href="/produtos/aliexpress-pt-es?cat=Aparafusadoras">Aparafusadoras</a>
+                        <a href="/produtos/aliexpress-pt-es?cat=Rebarbadora">Rebarbadora</a>
+                        <a href="/produtos/aliexpress-pt-es?cat=Serras">Serras</a>
+                        <a href="/produtos/aliexpress-pt-es?cat=Lixadora">Lixadora</a>
+                        <a href="/produtos/aliexpress-pt-es?cat=Plaina elétrica">Plaina elétrica</a>
+                        <a href="/produtos/aliexpress-pt-es?cat=Pistola de ar quente">Pistola de ar quente</a>
+                        <a href="/produtos/aliexpress-pt-es?cat=Compressores de ar">Compressores de ar</a>
+                        <a href="/produtos/aliexpress-pt-es?cat=Geradores elétricos">Geradores elétricos</a>
+                        <a href="/produtos/aliexpress-pt-es?cat=Bombas de água">Bombas de água</a>
+                    </div>
+                </li>
+
+                <!-- ALIEXPRESS (BR) -->
+                <li class="dropdown-item">
+                    <a href="javascript:void(0)" onclick="toggleSubMenu(this)">AliExpress (BR) ▾</a>
+                    <div class="dropdown-content">
+                        <a href="/produtos/aliexpress-br">Ver Tudo</a>
+                        <a href="/produtos/aliexpress-br?cat=Berbequim">Berbequim</a>
+                        <a href="/produtos/aliexpress-br?cat=Aparafusadoras">Aparafusadoras</a>
+                        <a href="/produtos/aliexpress-br?cat=Rebarbadora">Rebarbadora</a>
+                        <a href="/produtos/aliexpress-br?cat=Serras">Serras</a>
+                        <a href="/produtos/aliexpress-br?cat=Lixadora">Lixadora</a>
+                        <a href="/produtos/aliexpress-br?cat=Plaina elétrica">Plaina elétrica</a>
+                        <a href="/produtos/aliexpress-br?cat=Pistola de ar quente">Pistola de ar quente</a>
+                        <a href="/produtos/aliexpress-br?cat=Compressores de ar">Compressores de ar</a>
+                        <a href="/produtos/aliexpress-br?cat=Geradores elétricos">Geradores elétricos</a>
+                        <a href="/produtos/aliexpress-br?cat=Bombas de água">Bombas de água</a>
+                    </div>
+                </li>
+            </ul>
+
+            <div id="google_translate_element"></div>
+
+            <div class="nav-right">
+                {% if session.get('logged_in') %}
+                    <a href="/dashboard" class="admin-link">DASHBOARD</a>
+                    <a href="/logout" style="text-decoration: none; color: #000; font-size: 0.6rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-left: 5px;">SAIR</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/termos">Termos</a>
+            <a href="/privacidade">Privacidade</a>
+            <a href="/parceiros">Parceiros</a>
+            <a href="/guia">Guia</a>
+            <a href="/litigios">Litígios</a>
+        </div>
+        <p class="copyright">&copy; 2026 SKYROOT Tools</p>
+    </footer>
+
+    <script>
+        function toggleNav() {
+            var menu = document.getElementById("menuList");
+            menu.classList.toggle("active");
+        }
+
+        function toggleSubMenu(element) {
+            var allDropdowns = document.querySelectorAll('.dropdown-content');
+            var currentDropdown = element.nextElementSibling;
+
+            allDropdowns.forEach(function(dd) {
+                if (dd !== currentDropdown) {
+                    dd.classList.remove("active");
+                }
+            });
+
+            currentDropdown.classList.toggle("active");
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-item a') && !event.target.matches('.menu-toggle')) {
+                var dropdowns = document.querySelectorAll('.dropdown-content');
+                dropdowns.forEach(function(dd) {
+                    dd.classList.remove('active');
+                });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            if (!localStorage.getItem("cookieDecision")) {
+                var banner = document.getElementById("cookie-banner");
+                if (banner) {
+                    banner.style.display = "flex";
+                }
+            }
+        });
+
+        function setCookieConsent(status) {
+            localStorage.setItem("cookieDecision", status);
+            var banner = document.getElementById("cookie-banner");
+            if (banner) {
+                banner.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

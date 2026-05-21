@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="admin-container">
+    <h1 class="admin-title">Gestão de Inventário</h1>
+
+    <div class="form-wrapper">
+        <form action="/admin" method="POST">
+            <div class="admin-grid">
+
+                <!-- LOJA -->
+                <div class="form-group">
+                    <label class="form-label">LOJA:</label>
+                    <select name="affiliate" class="form-control">
+                        <option value="Amazon">Amazon Global</option>
+                        <option value="AliExpress-PT-ES">AliExpress (PT/ES)</option>
+                        <option value="AliExpress-BR">AliExpress (BR)</option>
+                    </select>
+                </div>
+
+                <!-- NOME -->
+                <div class="form-group">
+                    <label class="form-label">NOME DO PRODUTO:</label>
+                    <input type="text" name="name" required class="form-control">
+                </div>
+
+                <!-- PREÇO -->
+                <div class="form-group">
+                    <label class="form-label">PREÇO:</label>
+                    <input type="text" name="price" placeholder="0.00€" class="form-control">
+                </div>
+
+                <!-- CATEGORIA (ATUALIZADA COM AS 10 FERRAMENTAS) -->
+                <div class="form-group">
+                    <label class="form-label">CATEGORIA:</label>
+                    <select name="category" class="form-control">
+                        <option value="Berbequim">Berbequim</option>
+                        <option value="Aparafusadoras">Aparafusadoras</option>
+                        <option value="Rebarbadora">Rebarbadora</option>
+                        <option value="Serras">Serras</option>
+                        <option value="Lixadora">Lixadora</option>
+                        <option value="Plaina elétrica">Plaina elétrica</option>
+                        <option value="Pistola de ar quente">Pistola de ar quente</option>
+                        <option value="Compressores de ar">Compressores de ar</option>
+                        <option value="Geradores elétricos">Geradores elétricos</option>
+                        <option value="Bombas de água">Bombas de água</option>
+                    </select>
+                </div>
+
+                <!-- IMAGEM -->
+                <div class="form-group">
+                    <label class="form-label">FICHEIRO DA FOTO (Ex: mesa1.jpg):</label>
+                    <input type="text" name="image_url" required class="form-control">
+                </div>
+
+                <!-- LINK -->
+                <div class="form-group">
+                    <label class="form-label">LINK DE AFILIADO:</label>
+                    <input type="text" name="link" required class="form-control">
+                </div>
+
+                <!-- DESTAQUE -->
+                <div class="admin-featured">
+                    <input type="checkbox" name="featured" id="featured" value="yes" class="checkbox-control">
+                    <label for="featured" class="checkbox-label">
+                        ⭐ DESTACAR ESTE PRODUTO NA HOME (Destaques do Mês)
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                REGISTAR PRODUTO NO SISTEMA
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

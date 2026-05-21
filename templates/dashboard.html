@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="max-width: 1200px; margin: 40px auto; padding: 0 20px; font-family: 'Inter', sans-serif;">
+
+    <!-- TÍTULO E BOTÃO NOVO SUPERIOR -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 20px;">
+        <h1 style="font-size: 1.3rem; text-transform: uppercase; letter-spacing: 2px; margin: 0; font-weight: 800;">GESTÃO DE INVENTÁRIO</h1>
+        <a href="/admin" style="background: #000; color: #fff; padding: 12px 25px; text-decoration: none; font-weight: bold; font-size: 0.75rem; border-radius: 2px; letter-spacing: 1px;">+ NOVO PRODUTO</a>
+    </div>
+
+    <!-- BARRA DE SELEÇÃO DE MARCAS -->
+    <div style="margin-bottom: 40px; display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; border-bottom: 1px solid #f2f2f2;">
+        <span style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; align-self: center; margin-right: 10px; color: #bbb;">Filtrar:</span>
+
+        {% for brand in stores_data.keys() %}
+        <a href="#{{ brand|slugify }}" style="padding: 10px 20px; background: #f9f9f9; color: #000; text-decoration: none; font-size: 0.65rem; font-weight: bold; border-radius: 2px; border: 1px solid #eee; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;"
+           onmouseover="this.style.background='#000'; this.style.color='#fff';"
+           onmouseout="this.style.background='#f9f9f9'; this.style.color='#000';">
+           {{ brand }}
+        </a>
+        {% endfor %}
+    </div>
+
+    <!-- LOOP DAS LOJAS -->
+    {% for brand, categories in stores_data.items() %}
+    <div id="{{ brand|slugify }}" style="margin-bottom: 60px; background: #fff; border: 1px solid #eee; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+
+        <!-- BANNER DA LOJA -->
+        <div style="background: #1a1a1a; color: #fff; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center;">
+            <h2 style="margin: 0; text-transform: uppercase; letter-spacing: 5px; font-size: 1rem; font-weight: 600;">{{ brand }}</h2>
+            <a href="#top" style="color: #666; font-size: 0.5rem; text-decoration: none; text-transform: uppercase;">Voltar ao Topo ↑</a>
+        </div>
+
+        <div style="padding: 25px;">
+            {% for cat, products in categories.items() %}
+            <div style="margin-bottom: 40px;">
+                <h3 style="font-size: 0.65rem; text-transform: uppercase; background: #000; color: #fff; display: inline-block; padding: 5px 12px; margin-bottom: 15px; border-radius: 2px; letter-spacing: 2px;">
+                    {{ cat }}
+                </h3>
+
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tbody>
+                        {% for p in products %}
+                        <tr style="border-bottom: 1px solid #f9f9f9;">
+                            <td style="padding: 12px; width: 60px;">
+                                <div style="width: 50px; height: 50px; border: 1px solid #eee; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+                                    <img src="{{ url_for('static', filename='images/' + p.image) }}" style="max-width: 90%; max-height: 90%; object-fit: contain;" onerror="this.src='https://placehold.co';">
+                                </div>
+                            </td>
+                            <td style="padding: 12px;">
+                                <div style="font-weight: 600; font-size: 0.85rem;">{{ p.name }}</div>
+                            </td>
+                            <td style="padding: 12px; font-weight: bold; color: #27ae60; text-align: right; width: 120px;">{{ p.price }}</td>
+
+                            <!-- COLUNA DE AÇÕES OTIMIZADA -->
+                            <td style="padding: 12px; text-align: right; width: 320px; white-space: nowrap;">
+                                <a href="{{ url_for('toggle_featured', product_id=p.id) }}" style="text-decoration: none; margin-right: 15px; font-size: 1.2rem; vertical-align: middle;">{{ "⭐" if p.featured else "☆" }}</a>
+
+                                <a href="/edit/{{ p.id }}" style="color: #3498db; text-decoration: none; font-size: 0.6rem; font-weight: bold; border: 1px solid #3498db; padding: 6px 12px; border-radius: 2px; margin-right: 5px; vertical-align: middle;">Editar</a>
+
+                                <a href="{{ url_for('delete_product', product_id=p.id) }}" style="color: #e74c3c; text-decoration: none; font-size: 0.6rem; font-weight: bold; border: 1px solid #e74c3c; padding: 6px 12px; border-radius: 2px; margin-right: 15px; vertical-align: middle;" onclick="return confirm('Apagar?')">Remover</a>
+
+                                <!-- BLOCO LATERAL DE BOTÕES EMPILHADOS -->
+                                <div style="display: inline-flex; flex-direction: column; gap: 4px; vertical-align: middle; width: 85px;">
+                                    <!-- BOTÃO DO LINK EXTERNO -->
+                                    <a href="{{ p.link }}" target="_blank" rel="noopener noreferrer" style="background: #000; color: #fff; text-decoration: none; font-size: 0.55rem; font-weight: bold; padding: 5px 8px; border-radius: 2px; text-align: center; letter-spacing: 0.5px;">Link ↗</a>
+
+                                    <!-- NOVO BOTÃO DE ACESSO RÁPIDO PARA REGISTO -->
+                                    <a href="/admin" style="background: #f1f1f1; color: #000; border: 1px solid #ddd; text-decoration: none; font-size: 0.55rem; font-weight: bold; padding: 4px 8px; border-radius: 2px; text-align: center; letter-spacing: 0.5px;">+ Novo</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

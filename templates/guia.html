@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width: 900px; margin: 50px auto; padding: 0 20px; line-height: 1.8; color: #444; font-family: 'Inter', sans-serif;">
+
+    <section style="text-align: center; margin-bottom: 50px;">
+        <h1 style="color: #1a1a1a; font-size: 2rem; text-transform: uppercase; letter-spacing: 5px; font-weight: 300;">Guia de Utilizador</h1>
+        <p style="font-size: 1rem; color: #888; letter-spacing: 1px;">Tudo o que precisa de saber sobre a plataforma SkyRoot.</p>
+    </section>
+
+    <div style="display: grid; gap: 30px;">
+
+        <!-- Como Navegar -->
+        <article style="background: #fff; padding: 30px; border: 1px solid #eee; border-radius: 2px;">
+            <h2 style="color: #1a1a1a; margin-top: 0; font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #eee; padding-bottom: 10px;">1. Como Navegar</h2>
+            <p>O nosso website está organizado pelos principais retalhistas globais. Pode encontrar produtos específicos para o seu escritório clicando nos nomes das lojas no menu superior:</p>
+            <ul style="list-style-type: square; padding-left: 20px; font-size: 0.9rem;">
+                <li><strong>Amazon:</strong> Mobiliário e eletrónicos globais.</li>
+                <li><strong>Worten:</strong> Especialista em tecnologia e eletrodomésticos de escritório.</li>
+                <li><strong>Shopee:</strong> Gadgets criativos e acessórios de organização a preços competitivos.</li>
+                <li><strong>eBay / AliExpress:</strong> Ideal para itens exclusivos e componentes específicos.</li>
+            </ul>
+        </article>
+
+        <!-- Como Comprar -->
+        <article style="background: #fff; padding: 30px; border: 1px solid #eee; border-radius: 2px;">
+            <h2 style="color: #27ae60; margin-top: 0; font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #eee; padding-bottom: 10px;">2. Como Comprar</h2>
+            <p>O SkyRoot é um <strong>diretório de afiliados</strong>. Não vendemos produtos diretamente. Quando encontrar um item que lhe interesse:</p>
+            <ol style="font-size: 0.9rem;">
+                <li>Clique no botão <strong>"Adquirir Asset"</strong> ou <strong>"View Product"</strong>.</li>
+                <li>Será redirecionado para a loja oficial (ex: Amazon.pt).</li>
+                <li>Conclua a sua compra em total segurança na plataforma de destino.</li>
+            </ol>
+            <p><small><em>Nota: Os preços e envios são geridos pela loja final.</em></small></p>
+        </article>
+
+        <!-- Ferramenta de Clima -->
+        <article style="background: #fff; padding: 30px; border: 1px solid #eee; border-radius: 2px;">
+            <h2 style="color: #1a1a1a; margin-top: 0; font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #eee; padding-bottom: 10px;">3. Utilidade do Clima</h2>
+            <p>No topo do site, verá a temperatura local em tempo real. Esta ferramenta ajuda-o a decidir se é o momento ideal para investir em sistemas de climatização (ventoinhas/aquecedores) ou iluminação específica para dias mais escuros.</p>
+        </article>
+
+    </div>
+
+    <div style="text-align: center; margin-top: 60px; padding-bottom: 60px;">
+        <p style="font-size: 0.8rem; letter-spacing: 1px;">Ainda tem dúvidas?</p>
+        <a href="mailto:support@skyroot.com" style="color: #000; font-weight: bold; text-decoration: underline; font-size: 0.9rem;">Contactar Suporte</a>
+        <br><br>
+        <a href="/" style="color: #888; text-decoration: none; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px;">&larr; Voltar à Página Inicial</a>
+    </div>
+
+</div>
+{% endblock %}
