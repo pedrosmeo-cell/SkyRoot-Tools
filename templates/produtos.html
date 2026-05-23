@@ -6,19 +6,15 @@
         {{ category }} Collection
     </h1>
 
-    <!-- NOVO CONTADOR DINÂMICO DEBAIXO DO CABEÇALHO -->
+    <!-- NOVO CONTADOR DINÂMICO INTELIGENTE PARA FERRAMENTAS -->
     <div style="font-size: 0.65rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; color: #888; margin-bottom: 20px;">
-        {% set total_mesas = products | selectattr('category', 'equalto', 'Mesa') | list | length %}
-        {% set total_cadeiras = products | selectattr('category', 'equalto', 'Cadeira') | list | length %}
+        {% set cat_filtro = request.args.get('cat') %}
 
-        {% if request.args.get('cat') == 'Mesa' %}
-            Total: {{ total_mesas }} {{ "Mesa Disponível" if total_mesas == 1 else "Mesas Disponíveis" }}
-        {% elif request.args.get('cat') == 'Cadeira' %}
-            Total: {{ total_cadeiras }} {{ "Cadeira Disponível" if total_cadeiras == 1 else "Cadeiras Disponíveis" }}
+        {% if cat_filtro %}
+            {% set total_categoria = products | selectattr('category', 'equalto', cat_filtro) | list | length %}
+            Total em {{ cat_filtro }}: {{ total_categoria }} {{ "Artigo Disponível" if total_categoria == 1 else "Artigos Disponíveis" }}
         {% else %}
-            Total: {{ products|length }} {{ "Ativo Disponível" if products|length == 1 else "Ativos Disponíveis" }}
-            <span style="margin: 0 10px; color: #ccc;">|</span> Mesas: {{ total_mesas }}
-            <span style="margin: 0 10px; color: #ccc;">|</span> Cadeiras: {{ total_cadeiras }}
+            Total na Loja: {{ products|length }} {{ "Artigo Disponível" if products|length == 1 else "Artigos Disponíveis" }}
         {% endif %}
     </div>
 </section>
@@ -32,12 +28,12 @@
                 <div class="card" style="border: none; background: #fff; padding: 0;">
                     <div style="width: 100%; height: 400px; background: #fdfdfd; border: 1px solid #f1f1f1; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; border-radius: 4px;">
 
-                        <!-- Imagem com Redirecionamento Automático para a pasta static -->
+                        <!-- Imagem Corrigida: Lê diretamente da pasta de imagens global -->
                         <img src="{{ url_for('static', filename='images/' + p.image) }}"
                              alt="{{ p.name }}"
                              style="max-width: 85%; max-height: 85%; object-fit: contain; transition: 0.6s ease;"
                              onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
-                             onerror="this.src='/static/images/AliExpress_mesa_1.jpg';">
+                             onerror="this.src='{{ url_for('static', filename='images/home1.jpg') }}';">
                     </div>
 
                     <div style="padding: 25px 0;">

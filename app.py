@@ -7,11 +7,12 @@ from config import Config
 app = Flask(__name__)
 app.config.from_object(Config)
 
-# dicionário de conversão: mapeia o slug da URL para o nome exato no seu JSON
+# dicionário de conversão: ATUALIZADO com as tuas 4 novas lojas unificadas
 STORES_MAP = {
-    'amazon': 'Amazon',
-    'aliexpress-pt-es': 'AliExpress-PT-ES',
-    'aliexpress-br': 'AliExpress-BR'
+    'amazon': 'Amazon Global',
+    'amazon-br': 'Amazon Brasil',
+    'aliexpress-pt-es': 'AliExpress Global',
+    'aliexpress-br': 'AliExpress Brasil'
 }
 
 
@@ -73,7 +74,7 @@ def produtos(store_name):
     if slug not in STORES_MAP:
         return render_template('produtos.html', products=[], category=store_name.upper())
 
-    # target_brand assume o nome correto (ex: 'AliExpress-PT-ES')
+    # target_brand assume o nome correto (ex: 'AliExpress Global')
     target_brand = STORES_MAP[slug]
 
     # Filtragem precisa respeitando maiúsculas e minúsculas do arquivo JSON
